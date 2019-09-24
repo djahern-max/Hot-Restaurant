@@ -1,14 +1,21 @@
-var express = require("express");
+var bodyParser = require('body-parser');
+let express = require('express');
 
-var app = express();
-
+let app = express();
 var PORT = process.env.PORT || 8080;
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.get('/', function (req, res) {
+    res.send('Hello World');
+})
 
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+// parse various different custom JSON types as JSON
+app.use(bodyParser.json({ type: 'application/*+json' }))
+
+// parse some custom thing into a Buffer
+app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
+
+// parse an HTML body into a string
+app.use(bodyParser.text({ type: 'text/html' }))
 
 app.listen(PORT, function () {
     console.log("App listening on PORT: " + PORT);
