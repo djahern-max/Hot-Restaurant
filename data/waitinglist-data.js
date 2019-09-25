@@ -7,7 +7,7 @@ let waitingArray = [
     }
 ];
 
-console.log(waitingArray);
+// console.log(waitingArray);
 
 module.exports = waitingArray;
 

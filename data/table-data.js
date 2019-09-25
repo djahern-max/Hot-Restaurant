@@ -7,7 +7,7 @@ let tableArray = [
     }
 ];
 
-console.log(tableArray);
+// console.log(tableArray);
 
 module.exports = tableArray;
 
