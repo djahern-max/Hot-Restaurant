@@ -12,24 +12,23 @@ module.exports = function (app) {
         res.json(waitListData);
     });
 
+    app.post("/api/tables", function (req, res) {
 
+        if (tableData.length < 5) {
+            tableData.push(req.body)
+            res.json(true);
+        }
+        else {
+            waitListData.push(req.body);
+            req.json(false);
+        }
+    });
+    app.post("/api/clear", function () {
+        tableData.length = [];
+        waitListData.length = [];
 
-    //     app.post("/api/tables", function (req, res) {
-
-    //         if (tableData.length < 5) {
-    //             tableData.push(req.body)
-    //             res.json(true);
-    //         }
-    //         else {
-    //             waitListData.push(req.body);
-    //             req.json(false);
-    //         }
-    //     });
-    //     app.post("/api/clear", function (req, res) {
-    //         tableData.length = 0;
-    //         waitListData.length = 0;
-
-    //         res.json({ ok: true });
-    //     });
+        console.log(tableData);
+        console.log(waitListData);
+    });
 };
 

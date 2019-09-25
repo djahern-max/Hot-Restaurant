@@ -86,30 +86,61 @@
                 for (let i = 0; i < tableData.length; i++) {
                     console.log(tableData[i]);
 
+                    var tableSection = $("<div>");
+                    tableSection.addClass('well');
+                    tableSection.attr('id', 'tableWell-' + i + 1);
+                    $("#tableSection").append(tableSection);
+
+                    var tableNumber = i + 1;
+
+                    $("#tableWell-" + i + 1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + tableData[i].customerID + "</h2>");
                 }
             });
     }
+
+    function runWaitListQuery() {
+        var currentURL = window.location.origin;
+        $.ajax({ url: currentURL + "/api/waitList", method: "GET" })
+
+            .done(function (waitListData) {
+
+                console.log("______________________");
+                console.log("URL: " + currentURL + "/api/waitList");
+                console.log("______________________");
+                console.log(waitListData);
+                console.log("______________________");
+
+                for (let i = 0; i < waitListData.length; i++) {
+                    console.log(waitListData[i]);
+
+                    var waitListSection = $("<div>");
+                    waitListSection.addClass('well');
+                    waitListSection.attr('id', 'waitListWell-' + i + 1);
+                    $("#waitListSection").append(waitListSection);
+
+                    var tableNumber = i + 1;
+
+                    $("#waitListWell-" + i + 1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + waitListData[i].customerID + "</h2>");
+                }
+            });
+    }
+
+    function clearTable() {
+        var currentURL = window.location.origin;
+        $.ajax({ url: currentURL + "/api/clear", method: "POST" })
+    }
+
+    $("#clear").on('click', function () {
+
+        alert("Clearing...");
+        clearTable();
+        location.reload();
+
+    })
+
+    clearTable();
     runTableQuery();
-
-
-
-    // function runWaitListQuery() {
-
-    //     $.ajax({ url: "/api/waitlist", method: "GET" })
-    //         .then(function (waitData) {
-
-    //         })
-
-
-    // }
-
-
-
-
-
-
-
-
+    runWaitListQuery();
 
 
 </script>
