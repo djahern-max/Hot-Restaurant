@@ -72,42 +72,36 @@
 <script type="text/javascript">
 
     function runTableQuery() {
+        var currentURL = window.location.origin;
+        $.ajax({ url: currentURL + "/api/tables", method: "GET" })
 
-        $.ajax({ url: "/api/tables", method: "GET" })
-            .then(function (tableData) {
+            .done(function (tableData) {
 
-                console.log(tableData)
-                console.log("-------------------------------");
+                console.log("______________________");
+                console.log("URL: " + currentURL + "/api/tables");
+                console.log("______________________");
+                console.log(tableData);
+                console.log("______________________");
 
-                for (let i = 0; i < tableData.length; i++) {
+                for (let i = 0; i < array.length; i++) {
+                    console.log(tableData[i]);
 
-                    let tableList = $("#tableList");
-
-                    let listItem = $("<li class='list-group-item mt-4'>");
-
-                    listItem.append(
-                        $("<h2>").text("Table #" + (i + 1)),
-                        $("<hr>"),
-                        $("<h2>").text("ID: " + tableData[i].customerID),
-                        $("<h2>").text("Name: " + tableData[i].customerName),
-                        $("<h2>").text("Email: " + tableData[i].customerEmail),
-                        $("<h2>").text("Phone: " + tableData[i].phoneNumber)
-                    );
-
-                    tableList.append(listItem);
                 }
-            })
+            });
     }
-
-    function runWaitListQuery() {
-
-        $.ajax({ url: "/api/waitlist", method: "GET" })
-            .then(function (waitData) {
-
-            })
+    runTableQuery();
 
 
-    }
+
+    // function runWaitListQuery() {
+
+    //     $.ajax({ url: "/api/waitlist", method: "GET" })
+    //         .then(function (waitData) {
+
+    //         })
+
+
+    // }
 
 
 

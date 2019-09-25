@@ -11,4 +11,3 @@ console.log(tableArray);
 
 module.exports = tableArray;
 
-console.log("test");
